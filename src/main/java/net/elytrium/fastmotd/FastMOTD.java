@@ -58,7 +58,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import net.elytrium.commons.utils.reflection.ReflectionException;
-import net.elytrium.commons.utils.updates.UpdatesChecker;
 import net.elytrium.fastmotd.command.MaintenanceCommand;
 import net.elytrium.fastmotd.command.ReloadCommand;
 import net.elytrium.fastmotd.dummy.DummyPlayer;
@@ -144,12 +143,6 @@ public class FastMOTD {
   public void reload() {
     Settings.IMP.reload(this.configPath);
 
-    if (!UpdatesChecker.checkVersionByURL("https://raw.githubusercontent.com/Elytrium/FastMOTD/master/VERSION", Settings.IMP.VERSION)) {
-      this.logger.error("****************************************");
-      this.logger.warn("The new FastMOTD update was found, please update.");
-      this.logger.error("https://github.com/Elytrium/FastMOTD/releases/");
-      this.logger.error("****************************************");
-    }
     this.metricsFactory.make(this, 15640);
 
     ComponentSerializer<Component, Component, String> serializer = Settings.IMP.SERIALIZER.getSerializer();
